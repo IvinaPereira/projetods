@@ -204,7 +204,6 @@ public class Semestre implements Cloneable {
 
         Disciplina d1 = genee.get(aula1);
         Disciplina d2 = genee.get(aula2);
-        System.out.println(d1.getNome() + " e " + d2.getNome());
         genee.remove(aula1);
         genee.add(aula1, d2);
         genee.remove(aula2);

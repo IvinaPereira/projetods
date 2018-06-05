@@ -83,40 +83,40 @@ public class Banco {
         semestre.setDisciplinas(disc);
         sems.add(semestre);
     //criando terceiro semestre de sistemas
-//        disc = new ArrayList<>();
-//        semestre = new Semestre(0, "Terceiro", 3);
-//        d = new Disciplina("TGS", 1, professores.get(7));
-//        disc.add(d);
-//        d = new Disciplina("AEDII", 2, professores.get(5));
-//        disc.add(d);
-//        d = new Disciplina("SistemasO", 2, professores.get(2));
-//        disc.add(d);
-//        d = new Disciplina("Metodologia", 1, professores.get(0));
-//        disc.add(d);
-//        d = new Disciplina("Banco I", 2, professores.get(10));
-//        disc.add(d);
-//        d = new Disciplina("POO I", 2, professores.get(12));
-//        disc.add(d);
-//        semestre.setDisciplinas(disc);
-//        sems.add(semestre);
-//
+        disc = new ArrayList<>();
+        semestre = new Semestre("Terceiro", 10);
+        d = new Disciplina("TGS", 1, professores.get(7));
+        disc.add(d);
+        d = new Disciplina("AEDII", 2, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("SistemasO", 2, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("Metodologia", 1, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("Banco I", 2, professores.get(10));
+        disc.add(d);
+        d = new Disciplina("POO I", 2, professores.get(12));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
 //        //criando quarto semestre de sistemas
-//        disc = new ArrayList<>();
-//        semestre = new Semestre(0, "Quarto", 4);
-//        d = new Disciplina("APISI", 2, professores.get(4));
-//        disc.add(d);
-//        d = new Disciplina("Arquitetura", 2, professores.get(9));
-//        disc.add(d);
-//        d = new Disciplina("EngenhariaI", 1, professores.get(4));
-//        disc.add(d);
-//        d = new Disciplina("RedesI", 2, professores.get(8));
-//        disc.add(d);
-//        d = new Disciplina("POOII", 2, professores.get(12));
-//        disc.add(d);
-//        d = new Disciplina("Linguagens", 1, professores.get(11));
-//        disc.add(d);
-//        semestre.setDisciplinas(disc);
-//        sems.add(semestre);
+        disc = new ArrayList<>();
+        semestre = new Semestre("Quarto", 10);
+        d = new Disciplina("APISI", 2, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("Arquitetura", 2, professores.get(9));
+        disc.add(d);
+        d = new Disciplina("EngenhariaI", 1, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("RedesI", 2, professores.get(8));
+        disc.add(d);
+        d = new Disciplina("POOII", 2, professores.get(12));
+        disc.add(d);
+        d = new Disciplina("Linguagens", 1, professores.get(11));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
 //
 //        //criando quinto semestre de sistemas
 //        disc = new ArrayList<>();

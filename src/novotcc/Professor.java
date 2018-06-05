@@ -61,6 +61,26 @@ public class Professor implements Cloneable{
     public void setUmaDisponibilidade(int dia) {
         this.disponibilidade[dia] += 1;
     }
+    
+    public int getChoqueHorario(){
+        int n = 0;
+        for (int i = 0; i < 10; i++) {
+            if(horario[i] > 1){
+               n += horario[i];
+            }
+        }
+        return n;
+    }
+
+    public int getPreferencias(){
+        int n = 0;
+        for (int i = 0; i < 10; i++) {
+            if(horario[i] > 0 && disponibilidade[i] == 0){
+               n += horario[i];
+            }
+        }
+        return n;
+    }
 
     @Override
     protected Object clone() throws CloneNotSupportedException {

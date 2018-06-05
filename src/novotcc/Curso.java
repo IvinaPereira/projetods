@@ -74,7 +74,6 @@ public class Curso implements Cloneable{
         
         int i = rand.nextInt(semestres.size());
 
-        System.out.println("Mutando o semestre "+this.semestres.get(i).getNome());
         this.semestres.get(i).mutar();
         gerarNivelAptidao();
     }

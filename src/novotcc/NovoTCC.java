@@ -5,6 +5,8 @@
  */
 package novotcc;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ivina
@@ -16,27 +18,39 @@ public class NovoTCC {
      * @throws java.lang.CloneNotSupportedException
      */
     public static void main(String[] args) throws CloneNotSupportedException {
-//        Banco banco = new Banco();
+        ArrayList<Integer> media = new ArrayList<>();
+        ArrayList<Anticorpo> melhores = new ArrayList<>();
 
-        Anticorpo novo = new Anticorpo();
+        Populacao pop = new Populacao();
+        int cont = 0;
+        do {
+            media.add(pop.getMedia());
+            melhores.add(pop.getMelhor());
+            pop.atribuirPais();
+            pop.gerarCopias();
+            pop.imprimirSimples();
+            pop.mutar();
+            pop.retiraRuins();
+            pop.imprimirSimples();
+            cont++;
+        } while (cont < 200);
 
-        novo.setNome("Anticorpo001");
+        System.out.println("\n\n");
+        System.out.println("Medias das iteracoes");
+        for (int i = 0; i < media.size(); i++) {
+            System.out.print(media.get(i) + " - ");
+        }
 
-        
-        Anticorpo dois = (Anticorpo) novo.clone();
-        
-        
-        novo.mutar();
-        novo.mutar();
-        novo.mutar();
-        novo.mutar();
-        novo.mutar();
-        
-        novo.imprimir();
-//        novo.imprimirHorariosProfessores();
-        dois.imprimir();
-//        dois.imprimirHorariosProfessores();
-        
+        System.out.println("\n");
+        System.out.println("Melhores individuos");
+        for (int i = 0; i < melhores.size(); i++) {
+            System.out.print(melhores.get(i).getNivelAptidao() + " - ");
+        }
+
+        pop.imprimirSimples();
+        System.out.println("\n\n");
+        pop.getMelhor().imprimir();
+        System.out.println("Quantidade de Iteracoes:" + cont);
     }
 
 }
