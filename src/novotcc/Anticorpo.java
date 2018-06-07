@@ -19,6 +19,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
     private String nome;
     private boolean pai;
     private int nivelAptidao;
+    private int qtdCopias;
 
     Banco banco = new Banco();
     private int pesoFuncao3 = 5;
@@ -61,6 +62,15 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         return pai;
     }
 
+    public int getQtdCopias() {
+        return qtdCopias;
+    }
+
+    public int gerarqtdCopias() {
+        this.qtdCopias = this.nivelAptidao / 10;
+        return qtdCopias;
+    }
+
     public void setPai(boolean pai) {
         this.pai = pai;
     }
@@ -77,6 +87,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         n += funcao3();
         n += funcao4();
         this.nivelAptidao = 100 - n;
+        gerarqtdCopias();
     }
 
     //retorna todos os choques de horarios de todos os professores
@@ -121,6 +132,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
     public void mutar() {
         Random rand = new Random();
 
+        int taxa = (1/nivelAptidao)*100;
         int i = rand.nextInt(this.cursos.size());
 
         this.cursos.get(i).mutar();

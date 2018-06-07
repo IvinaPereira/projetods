@@ -45,7 +45,7 @@ public class Populacao {
         int copias = 0;
         for (int i = 0; i < this.horarios.size(); i++) {
             if (this.horarios.get(i).isPai()) {
-                copias = 2;
+                copias = this.horarios.get(i).getQtdCopias();
                 while (copias > 0) {
                     Anticorpo copy = new Anticorpo(false);
                     copy = (Anticorpo) horarios.get(i).clone();
@@ -87,6 +87,10 @@ public class Populacao {
                 }
             }
         }
+    }
+    
+    public void escolherHorario(){
+        
     }
 
     public void ordenar() {
