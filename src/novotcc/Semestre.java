@@ -20,8 +20,8 @@ public class Semestre implements Cloneable {
     private int qtdAulas;
     private String nome;
 
-    private int pesoFuncao1 = 4;
-    private int pesoFuncao2 = 1;
+    private int pesoFuncao1 = 8;
+    private int pesoFuncao2 = 3;
 
     public Semestre() {
         adicionarDiscVagas();

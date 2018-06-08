@@ -21,13 +21,15 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
     private int nivelAptidao;
     private int qtdCopias;
 
-    Banco banco = new Banco();
-    private int pesoFuncao3 = 5;
-    private int pesoFuncao4 = 3;
+    private int pesoFuncao3 = 10;
+    private int pesoFuncao4 = 6;
 
-    public Anticorpo(String nome) throws CloneNotSupportedException {
+    private Banco banco;
+    
+    public Anticorpo(String nome, Banco banco) throws CloneNotSupportedException {
         this.nome = nome;
-        adicionarProfessores();
+        this.banco = banco;
+        adicionarProfessores(this.banco);
         gerar();
     }
 
@@ -67,7 +69,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
     }
 
     public int gerarqtdCopias() {
-        this.qtdCopias = this.nivelAptidao / 10;
+        this.qtdCopias = this.nivelAptidao / 100;
         return qtdCopias;
     }
 
@@ -86,7 +88,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         }
         n += funcao3();
         n += funcao4();
-        this.nivelAptidao = 100 - n;
+        this.nivelAptidao = 800 - n;
         gerarqtdCopias();
     }
 
@@ -109,8 +111,6 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
     }
 
     public void gerar() throws CloneNotSupportedException {
-        Banco banco = new Banco();
-
         ArrayList<Curso> curss = banco.getCursos();
         for (Curso curso : curss) {
             Curso cur = new Curso(curso.getNome());
@@ -120,7 +120,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         gerarNivelAptidao();
     }
 
-    public void adicionarProfessores() throws CloneNotSupportedException {
+    public void adicionarProfessores(Banco banco) throws CloneNotSupportedException {
         ArrayList<Professor> professores = banco.getProf();
 
         for (Professor professor : professores) {
@@ -162,10 +162,9 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         System.out.println("\n");
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
+    protected Object clone(Banco banco) throws CloneNotSupportedException {
         Anticorpo copia = new Anticorpo(false);
-        copia.adicionarProfessores();
+        copia.adicionarProfessores(banco);
         copia.setCursos(clonarCursos(copia.getProfAnticorpo()));
         copia.gerarNivelAptidao();
         copia.setPai(false);

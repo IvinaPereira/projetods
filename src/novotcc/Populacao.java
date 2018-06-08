@@ -15,10 +15,12 @@ import java.util.Collections;
 public class Populacao {
 
     private ArrayList<Anticorpo> horarios = new ArrayList<>();
-    private int tamanho = 20;
+    private int tamanho = 200;
     private int media;
+    private Banco banco;
 
-    public Populacao() throws CloneNotSupportedException {
+    public Populacao(Banco banco) throws CloneNotSupportedException {
+        this.banco = banco;
         gerar();
         gerarMedia();
     }
@@ -26,7 +28,7 @@ public class Populacao {
     public void gerar() throws CloneNotSupportedException {
         ArrayList<Anticorpo> individuos = new ArrayList<>();
         for (int i = 0; i < tamanho; i++) {
-            Anticorpo ind = new Anticorpo("Anticorpo00" + i);
+            Anticorpo ind = new Anticorpo("Anticorpo00" + i, banco);
             individuos.add(ind);
         }
         this.horarios.addAll(individuos);
@@ -48,7 +50,7 @@ public class Populacao {
                 copias = this.horarios.get(i).getQtdCopias();
                 while (copias > 0) {
                     Anticorpo copy = new Anticorpo(false);
-                    copy = (Anticorpo) horarios.get(i).clone();
+                    copy = (Anticorpo) horarios.get(i).clone(banco);
                     horarios.add(copy);
                     copias--;
                 }

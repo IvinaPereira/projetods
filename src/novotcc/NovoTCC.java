@@ -21,19 +21,32 @@ public class NovoTCC {
         ArrayList<Integer> media = new ArrayList<>();
         ArrayList<Anticorpo> melhores = new ArrayList<>();
 
-        Populacao pop = new Populacao();
+        Banco banco = new Banco(2);
+        Populacao pop = new Populacao(banco);
         int cont = 0;
+        int ultimaGeracao = 0;
+        int melhor = pop.getMelhor().getNivelAptidao();
+        pop.imprimirSimples();
         do {
             media.add(pop.getMedia());
             melhores.add(pop.getMelhor());
             pop.atribuirPais();
             pop.gerarCopias();
-            pop.imprimirSimples();
+//            pop.imprimirSimples();
             pop.mutar();
             pop.retiraRuins();
-            pop.imprimirSimples();
+//            pop.imprimirSimples();
             cont++;
-        } while (cont < 200);
+            if(cont%500 == 0){
+                System.out.println("Iteração "+cont);
+            }
+            if(melhor < melhores.get(melhores.size()-1).getNivelAptidao()){
+                melhor = melhores.get(melhores.size()-1).getNivelAptidao();
+                ultimaGeracao = cont;
+            }
+            
+            
+        } while (cont < 13000 || melhor < 800);
 
         System.out.println("\n\n");
         System.out.println("Medias das iteracoes");
@@ -50,6 +63,9 @@ public class NovoTCC {
         pop.imprimirSimples();
         System.out.println("\n\n");
         pop.getMelhor().imprimir();
+        pop.getMelhor().imprimirHorariosProfessores();
+        System.out.println("Melhor"+ pop.getMelhor().getNivelAptidao());
+        System.out.println("Ultima geração"+ ultimaGeracao);
         System.out.println("Quantidade de Iteracoes:" + cont);
     }
 
