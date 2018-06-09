@@ -77,6 +77,8 @@ public class Semestre implements Cloneable {
         int nivel = 0;
         for (int i = 0; i < 5; i++) {
             if (disciplinas.get(i).equals(disciplinas.get(i + 5))) {
+                disciplinas.get(i).setMesmoDia(true);
+                disciplinas.get(i+5).setMesmoDia(true);
                 nivel++;
             }
         }
@@ -91,6 +93,7 @@ public class Semestre implements Cloneable {
             for (int i = 0; i < 5; i++) {
 //          se a disciplina for vaga
                 if (disciplinas.get(i).isVaga()) {
+                    disciplinas.get(i).setVagaAB(true);
                     nivel++;
                 }
             }
@@ -129,10 +132,10 @@ public class Semestre implements Cloneable {
     }
 
     public void imprimirDisciplinas() {
-        System.out.println(this.nome + " Semestre -| id " + (this.id + 1) + " end " + toString()+ "  APT-"+this.nivelAptidao);
+        System.out.println("\n"+this.nome + " Semestre -| id " + (this.id + 1) + "APT-"+this.nivelAptidao);
         int i = 0;
         for (Disciplina disciplina : this.disciplinas) {
-            disciplina.imprimirNome();
+            disciplina.imprimirFormatado(i);
             if (i == 4) {
                 System.out.println("");
             }
@@ -222,6 +225,14 @@ public class Semestre implements Cloneable {
             genee.get(aula2).getProfessor().setUmHorario(aula2);
             genee.get(aula2).getProfessor().retiraUmHorario(aula1);
         }
+        
+        
+        
+        genee.get(aula1).setVagaAB(false);
+        genee.get(aula1).setMesmoDia(false);
+        genee.get(aula2).setVagaAB(false);
+        genee.get(aula2).setMesmoDia(false);
+        
         gerarNivelAptidao();
     }
 }

@@ -17,6 +17,11 @@ public class Disciplina implements Cloneable {
     private boolean isVaga;
     private int id;
 
+    private boolean mesmoDia;
+    private boolean vagaAB;
+    private boolean profChoque;
+    private boolean profPrefer;
+
     public Disciplina(String nome, Integer aulas, Professor professor) {
         this.professor = professor;
         this.nome = nome;
@@ -24,7 +29,8 @@ public class Disciplina implements Cloneable {
     }
 
     public Disciplina() {
-
+        this.mesmoDia = false;
+        this.vagaAB = false;
     }
 
     public Disciplina(boolean vaga) {
@@ -69,7 +75,7 @@ public class Disciplina implements Cloneable {
 
     public void setIsVaga(boolean isVaga) {
         this.isVaga = isVaga;
-    }    
+    }
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
@@ -79,25 +85,50 @@ public class Disciplina implements Cloneable {
         if (!isVaga()) {
             copia.setProfessor((Professor) getProfessor().clone());
             copia.setIsVaga(false);
-        }else{
+        } else {
             copia.setIsVaga(true);
         }
+
         return copia;
     }
 
-
     void imprimir() {
         System.out.println(getNome() + " " + toString() + "  ");
-        if (!isVaga) {
-            getProfessor().imprimir();
-        } else {
+        if (isVaga) {
             System.out.println("nao tem professor");
+        } else {
+            getProfessor().imprimir();
         }
     }
-    
-    void imprimirNome() {
-        System.out.print(getNome() + " -- ");
+
+    public void setVagaAB(boolean vaga) {
+        this.vagaAB = vaga;
     }
 
+    public void setMesmoDia(boolean vaga) {
+        this.mesmoDia = vaga;
+    }
+
+    void imprimirFormatado(int i) {
+        if (i == 0) {
+            System.out.print(NovoTCC.GREEN + NovoTCC.branco + " AB " + NovoTCC.RESET);
+        } else if (i == 5){
+            System.out.print(NovoTCC.GREEN + NovoTCC.branco + " CD " + NovoTCC.RESET);
+        }
+        if (isVaga) {
+            if (vagaAB) {
+                System.out.print(NovoTCC.roxo + "" + getNome() + " -- ");
+            }
+        } else if (mesmoDia) {
+            System.out.print(NovoTCC.amarelo + "" + getNome() + " -- ");
+        } else if (professor.getUmHorario(i) > 1) {
+            System.out.print(NovoTCC.vermelho + "" + getNome() + " -- ");
+        } else if (professor.getUmaPrefe(i) == 0) {
+            System.out.print(NovoTCC.ciano + "" + getNome() + " -- ");
+        } else {
+            System.out.print(NovoTCC.verde + "" + getNome() + " -- ");
+        }
+
+    }
 
 }

@@ -12,14 +12,14 @@ import java.util.Random;
  *
  * @author ivina
  */
-public class Curso implements Cloneable{
-    
+public class Curso implements Cloneable {
+
     private ArrayList<Semestre> semestres = new ArrayList<>();
     private String nome;
     private int nivelAptidao;
-    
+
     public Curso() {
-    
+
     }
 
     public Curso(String nome) {
@@ -32,8 +32,8 @@ public class Curso implements Cloneable{
 
     public void setNome(String nome) {
         this.nome = nome;
-    }  
-    
+    }
+
     public ArrayList<Semestre> getSemestres() {
         return semestres;
     }
@@ -49,40 +49,38 @@ public class Curso implements Cloneable{
 //    public void setNivelAptidao(int nivelAptidao) {
 //        this.nivelAptidao = nivelAptidao;
 //    }
-    
     public void gerarNivelAptidao() {
         int n = 0;
-        for(Semestre sem : semestres){
+        for (Semestre sem : semestres) {
             n += sem.getNivelAptidao();
         }
         this.nivelAptidao = n;
     }
-        
-      
-    public void gerar(Curso banco, ArrayList<Professor> profs) throws CloneNotSupportedException{
+
+    public void gerar(Curso banco, ArrayList<Professor> profs) throws CloneNotSupportedException {
         ArrayList<Semestre> semes = banco.getSemestres();
         for (Semestre semestre : semes) {
-            Semestre sem = new Semestre(semestre.getNome(),semestre.getQtdAulas());
-            sem.gerar(semestre,profs);
-            this.semestres.add(sem);            
+            Semestre sem = new Semestre(semestre.getNome(), semestre.getQtdAulas());
+            sem.gerar(semestre, profs);
+            this.semestres.add(sem);
         }
         gerarNivelAptidao();
     }
-    
-    public void mutar(){
-        Random rand = new Random();
-        
-        int i = rand.nextInt(semestres.size());
 
+    public void mutar() {
+        Random rand = new Random();
+
+        int i = rand.nextInt(semestres.size());
         this.semestres.get(i).mutar();
+        
         gerarNivelAptidao();
     }
-    
-    public void imprimir(){
-        System.out.println("\n"+getNome() +" "+ this+ " APT-"+nivelAptidao);
+
+    public void imprimir() {
+        System.out.println("\n" + getNome() + " " + this + " APT-" + nivelAptidao);
         for (Semestre semestre : this.semestres) {
             semestre.imprimirDisciplinas();
-            
+
         }
     }
 
@@ -92,9 +90,9 @@ public class Curso implements Cloneable{
         copia.setSemestres(clonarSemestres(profs));
         copia.gerarNivelAptidao();
         return copia;
-    }    
-    
-    private ArrayList<Semestre> clonarSemestres(ArrayList<Professor> profs) throws CloneNotSupportedException{
+    }
+
+    private ArrayList<Semestre> clonarSemestres(ArrayList<Professor> profs) throws CloneNotSupportedException {
         ArrayList<Semestre> clonados = new ArrayList<>();
         for (Semestre semestre : semestres) {
             Semestre copia = (Semestre) semestre.clone(profs);
@@ -102,5 +100,5 @@ public class Curso implements Cloneable{
         }
         return clonados;
     }
-    
+
 }

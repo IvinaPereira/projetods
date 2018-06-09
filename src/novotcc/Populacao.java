@@ -15,7 +15,7 @@ import java.util.Collections;
 public class Populacao {
 
     private ArrayList<Anticorpo> horarios = new ArrayList<>();
-    private int tamanho = 200;
+    private int tamanho = 100;
     private int media;
     private Banco banco;
 
@@ -28,7 +28,7 @@ public class Populacao {
     public void gerar() throws CloneNotSupportedException {
         ArrayList<Anticorpo> individuos = new ArrayList<>();
         for (int i = 0; i < tamanho; i++) {
-            Anticorpo ind = new Anticorpo("Anticorpo00" + i, banco);
+            Anticorpo ind = new Anticorpo("Anticorpo", banco);
             individuos.add(ind);
         }
         this.horarios.addAll(individuos);
@@ -45,9 +45,10 @@ public class Populacao {
 
     public void gerarCopias() throws CloneNotSupportedException {
         int copias = 0;
+        int melhor = getMelhor().getNivelAptidao();
         for (int i = 0; i < this.horarios.size(); i++) {
             if (this.horarios.get(i).isPai()) {
-                copias = this.horarios.get(i).getQtdCopias();
+                copias = this.horarios.get(i).gerarqtdCopias(melhor);
                 while (copias > 0) {
                     Anticorpo copy = new Anticorpo(false);
                     copy = (Anticorpo) horarios.get(i).clone(banco);
@@ -79,20 +80,20 @@ public class Populacao {
         }
     }
 
-    public void mutar() {
-        int cont = 3;
+    public void mutar() throws CloneNotSupportedException {
+//        int taxa = 3;
         for (Anticorpo horario : horarios) {
             if (!horario.isPai()) {
-                while (cont > 0) {
+//                while (taxa > 0) {
                     horario.mutar();
-                    cont--;
-                }
+//                    taxa--;
+//                }
             }
         }
     }
-    
-    public void escolherHorario(){
-        
+
+    public void escolherHorario() {
+
     }
 
     public void ordenar() {
@@ -129,6 +130,32 @@ public class Populacao {
 
     public ArrayList<Anticorpo> getHorarios() {
         return horarios;
+    }
+
+    public void todosIguais() throws CloneNotSupportedException {
+        ordenar();
+        if (horarios.get(0).getNivelAptidao() == horarios.get(horarios.size() - 1).getNivelAptidao()) {
+//        imprimirSimples();
+            int porcentagem = 10;
+            int tamInicial = tamanho * porcentagem / 100;
+            ArrayList<Anticorpo> novos = new ArrayList<>();
+//            System.out.println("\n\n\n\n\novos");
+            for (int i = tamInicial; i < tamanho; i++) {
+                Anticorpo ind = new Anticorpo("Anticorpo", banco);
+                novos.add(ind);
+//                System.out.println("ind aptd"+ ind.getNivelAptidao());
+            }
+            ArrayList<Anticorpo> antigos = new ArrayList<>();
+//            System.out.println("\n\n\n\n antigos");
+            for (int i = 0; i < tamInicial; i++) {
+                antigos.add(horarios.get(i));
+//                System.out.println("ind aptd"+ horarios.get(i).getNivelAptidao());
+            }
+            antigos.addAll(novos);
+//            System.out.println("\n\n\n\n atualizados");
+            this.horarios = antigos;
+//            imprimirSimples();
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 package novotcc;
 
-public class Professor implements Cloneable{
-    
+public class Professor implements Cloneable {
+
     private String nome;
     private int id;
     private int[] horario;
@@ -10,7 +10,7 @@ public class Professor implements Cloneable{
     public Professor() {
         setHorario(addHorarioVazio());
     }
-    
+
     public Professor(String Nome, int[] disponibilidade, int id) {
         this.nome = Nome;
         this.id = id;
@@ -33,7 +33,7 @@ public class Professor implements Cloneable{
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public int[] getHorario() {
         return horario;
     }
@@ -45,13 +45,21 @@ public class Professor implements Cloneable{
     public void setUmHorario(int dia) {
         this.horario[dia] = this.horario[dia] + 1;
     }
-    
+
     public void retiraUmHorario(int dia) {
         this.horario[dia] = this.horario[dia] - 1;
     }
 
     public int[] getDisponibilidade() {
         return disponibilidade;
+    }
+
+    public int getUmHorario(int dia) {
+        return horario[dia];
+    }
+
+    public int getUmaPrefe(int dia) {
+        return disponibilidade[dia];
     }
 
     public void setDisponibilidade(int[] disponibilidade) {
@@ -61,22 +69,22 @@ public class Professor implements Cloneable{
     public void setUmaDisponibilidade(int dia) {
         this.disponibilidade[dia] += 1;
     }
-    
-    public int getChoqueHorario(){
+
+    public int getChoqueHorario() {
         int n = 0;
         for (int i = 0; i < 10; i++) {
-            if(horario[i] > 1){
-               n += horario[i];
+            if (horario[i] > 1) {
+                n += horario[i];
             }
         }
         return n;
     }
 
-    public int getPreferencias(){
+    public int getPreferencias() {
         int n = 0;
         for (int i = 0; i < 10; i++) {
-            if(horario[i] > 0 && disponibilidade[i] == 0){
-               n += horario[i];
+            if (horario[i] > 0 && disponibilidade[i] == 0) {
+                n += horario[i];
             }
         }
         return n;
@@ -90,8 +98,8 @@ public class Professor implements Cloneable{
         copia.setDisponibilidade(clonarDisponibilidade());
         return copia;
     }
-    
-    private int[] clonarDisponibilidade(){
+
+    private int[] clonarDisponibilidade() {
         int[] copia = new int[10];
         for (int i = 0; i < 10; i++) {
             int num = disponibilidade[i];
@@ -99,25 +107,36 @@ public class Professor implements Cloneable{
         }
         return copia;
     }
-    
-    private int[] addHorarioVazio(){
-        int[] horario = new int[]{0,0,0,0,0,0,0,0,0,0};
-        return horario; 
+
+    private int[] addHorarioVazio() {
+        int[] horario = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        return horario;
     }
-            
+
     public void imprimir() {
-        System.out.println(getNome() + " "+ toString());
+        System.out.println(getNome() + " " + toString());
     }
-  
-    public void imprimirHorario() {
-        System.out.println("\n"+getNome() + " "+ toString());
+
+    public void imprimirEndereco() {
+        System.out.println("\n" + getNome() + " " + toString());
         for (int i = 0; i < 10; i++) {
             System.out.print(this.horario[i] + " ");
-            if(i == 4){
+            if (i == 4) {
                 System.out.println("");
             }
         }
     }
-    
-    
+
+    public void imprimirHorario() {
+        System.out.println("\n" + getNome());
+        System.out.print(NovoTCC.GREEN + NovoTCC.branco + " AB " + NovoTCC.RESET);
+        for (int i = 0; i < 10; i++) {
+            System.out.print(this.horario[i] + " ");
+            if (i == 4) {
+                System.out.println("");
+                System.out.print(NovoTCC.GREEN + NovoTCC.branco + " CD " + NovoTCC.RESET);
+            }
+        }
+    }
+
 }

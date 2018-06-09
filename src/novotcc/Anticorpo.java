@@ -68,8 +68,9 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         return qtdCopias;
     }
 
-    public int gerarqtdCopias() {
-        this.qtdCopias = this.nivelAptidao / 100;
+    public int gerarqtdCopias(int melhorIndividuo) {
+        int taxa = melhorIndividuo / 10;
+        this.qtdCopias = this.nivelAptidao / taxa;
         return qtdCopias;
     }
 
@@ -89,7 +90,6 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         n += funcao3();
         n += funcao4();
         this.nivelAptidao = 800 - n;
-        gerarqtdCopias();
     }
 
     //retorna todos os choques de horarios de todos os professores
@@ -131,11 +131,14 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
 
     public void mutar() {
         Random rand = new Random();
-
-        int taxa = (1/nivelAptidao)*100;
-        int i = rand.nextInt(this.cursos.size());
-
-        this.cursos.get(i).mutar();
+        float valor1 = (float) (1.0/(nivelAptidao));
+        float novo = (valor1)*1000;
+        int taxa = (int)novo;
+        taxa = taxa * taxa;
+        for (int j = 0; j < taxa; j++) {
+            int i = rand.nextInt(this.cursos.size());
+            this.cursos.get(i).mutar();
+        }
         gerarNivelAptidao();
     }
 
@@ -147,7 +150,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
     }
 
     public void imprimirProfessores() {
-        System.out.println("Professores do " + getNome());
+        System.out.print("\n---- Professores ----\n");
         for (Professor professor : profAnticorpo) {
             professor.imprimir();
         }
@@ -155,7 +158,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
     }
 
     public void imprimirHorariosProfessores() {
-        System.out.println("Professores do " + getNome());
+        System.out.print("\n\n---- Professores ----");
         for (Professor professor : profAnticorpo) {
             professor.imprimirHorario();
         }
@@ -167,6 +170,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         copia.adicionarProfessores(banco);
         copia.setCursos(clonarCursos(copia.getProfAnticorpo()));
         copia.gerarNivelAptidao();
+        copia.setNome("Anticorpo");
         copia.setPai(false);
         return copia;
     }
