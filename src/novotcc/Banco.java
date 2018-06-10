@@ -34,6 +34,11 @@ public class Banco {
                 gerarCaso2();
             }
             break;
+            case 3: {
+                gerarProfsCaso3();
+                gerarCaso2();
+            }
+            break;
 
         }
 //        imprimirCursos();
@@ -488,7 +493,7 @@ public class Banco {
     }
 
     private void gerarCaso1() {
-        Curso curso = new Curso("Sistemas de Informação");
+        Curso curso = new Curso("Curso 1");
         ArrayList<Semestre> sems = new ArrayList<>();
         //criando o primeiro semestre de sistemas
         ArrayList<Disciplina> disc = new ArrayList<>();
@@ -684,7 +689,7 @@ public class Banco {
     }
     
     private void gerarCaso2() {
-        Curso curso = new Curso("Sistemas de Informação");
+        Curso curso = new Curso("Curso 1");
         ArrayList<Semestre> sems = new ArrayList<>();
         //criando o primeiro semestre de sistemas
         ArrayList<Disciplina> disc = new ArrayList<>();
@@ -885,6 +890,64 @@ public class Banco {
         profs.add(prof);
 
         disponibilidade = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 10", disponibilidade, 10);
+        profs.add(prof);
+
+        this.professores = profs;        
+    }
+    
+        private void gerarProfsCaso3() {
+        ArrayList<Professor> profs = new ArrayList<>();
+        //disponibilidade dos professores, 1 - Sim // 0 - Não
+        //6
+        int[] disponibilidade = {1, 0, 1, 0, 1, 1, 0, 1, 1, 1};
+        Professor prof = new Professor("Professor 0", disponibilidade, 0);
+        profs.add(prof);
+
+        //4
+        disponibilidade = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 0, 1};
+        prof = new Professor("Professor 1", disponibilidade, 1);
+        profs.add(prof);
+
+        //10
+        disponibilidade = new int[]{1, 1, 1, 0, 1, 1, 1, 1, 1, 0};
+        prof = new Professor("Professor 2", disponibilidade, 2);
+        profs.add(prof);
+
+        //6
+        disponibilidade = new int[]{0, 1, 1, 0, 1, 1, 1, 1, 1, 0};
+        prof = new Professor("Professor 3", disponibilidade, 3);
+        profs.add(prof);
+
+        //5
+        disponibilidade = new int[]{1, 1, 1, 0, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 4", disponibilidade, 4);
+        profs.add(prof);
+
+        //9
+        disponibilidade = new int[]{1, 1, 0, 1, 1, 1, 0, 1, 1, 1};
+        prof = new Professor("Professor 5", disponibilidade, 5);
+        profs.add(prof);
+
+        //6
+        disponibilidade = new int[]{0, 0, 1, 1, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 6", disponibilidade, 6);
+        profs.add(prof);
+
+        //5
+        disponibilidade = new int[]{1, 1, 1, 0, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 7", disponibilidade, 7);
+        profs.add(prof);
+
+        disponibilidade = new int[]{1, 0, 1, 1, 0, 0, 1, 1, 0, 0};
+        prof = new Professor("Professor 8", disponibilidade, 8);
+        profs.add(prof);
+
+        disponibilidade = new int[]{1, 1, 0, 1, 1, 0, 0, 1, 1, 1};
+        prof = new Professor("Professor 9", disponibilidade, 9);
+        profs.add(prof);
+
+        disponibilidade = new int[]{1, 0, 0, 0, 1, 0, 0, 1, 1, 1};
         prof = new Professor("Professor 10", disponibilidade, 10);
         profs.add(prof);
 

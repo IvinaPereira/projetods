@@ -124,7 +124,7 @@ public class Semestre implements Cloneable {
     }
 
     public void imprimir() {
-        System.out.println(this.nome + " Semestre -| id " + (this.id + 1) + " end " + toString()+ "  APT-"+this.nivelAptidao);
+        System.out.println(this.nome + " Semestre -  APT-"+this.nivelAptidao);
         for (Disciplina disciplina : this.disciplinas) {
             disciplina.imprimir();
         }
@@ -132,7 +132,7 @@ public class Semestre implements Cloneable {
     }
 
     public void imprimirDisciplinas() {
-        System.out.println("\n"+this.nome + " Semestre -| id " + (this.id + 1) + "APT-"+this.nivelAptidao);
+        System.out.println(""+this.nome + " Semestre - APT-"+this.nivelAptidao);
         int i = 0;
         for (Disciplina disciplina : this.disciplinas) {
             disciplina.imprimirFormatado(i);

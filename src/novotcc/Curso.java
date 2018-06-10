@@ -77,7 +77,7 @@ public class Curso implements Cloneable {
     }
 
     public void imprimir() {
-        System.out.println("\n" + getNome() + " " + this + " APT-" + nivelAptidao);
+        System.out.println("\n" + getNome() + " APT-" + nivelAptidao);
         for (Semestre semestre : this.semestres) {
             semestre.imprimirDisciplinas();
 

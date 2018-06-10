@@ -41,7 +41,7 @@ public class NovoTCC {
         ArrayList<Integer> anticorposBons = new ArrayList<>();
         ArrayList<Anticorpo> melhores = new ArrayList<>();
 
-        Banco banco = new Banco(1);
+        Banco banco = new Banco(3);
         Populacao pop = new Populacao(banco);
         int cont = 0;
         int ultimaGeracao = 0;
@@ -76,7 +76,7 @@ public class NovoTCC {
             }
 
 //        } while (cont < 1000 );
-        } while (cont < 10000 && melhor < 800);
+        } while (cont < 1000 && melhor < 800);
 
         System.out.println("\n\n");
         System.out.println(ciano + "Medias das iteracoes");
