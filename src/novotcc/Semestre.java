@@ -20,7 +20,7 @@ public class Semestre implements Cloneable {
     private int qtdAulas;
     private String nome;
 
-    private int pesoFuncao1 = 15;
+    private int pesoFuncao1 = 14;
     private int pesoFuncao2AB = 3;
     private int pesoFuncao2Disc = 6;
     private int pesoFuncao2Vaga = 6;
@@ -136,7 +136,7 @@ public class Semestre implements Cloneable {
         int nivel3 = 0;
         int diasDisponiveis = 5;
 
-        if (qtdAulas != 10) {
+        if (qtdAulas <= 10) {
 
             if (bloquear) {
                 diasDisponiveis = 4;

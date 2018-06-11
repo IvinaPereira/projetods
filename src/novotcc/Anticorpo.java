@@ -27,7 +27,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
     private int mutacaoAlta;
 
     private Banco banco;
-    
+
     public Anticorpo(String nome, Banco banco) throws CloneNotSupportedException {
         this.nome = nome;
         this.banco = banco;
@@ -91,7 +91,7 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         }
         n += funcao3();
         n += funcao4();
-        this.nivelAptidao = 800 - n;
+        this.nivelAptidao = 1200 - n;
     }
 
     //retorna todos os choques de horarios de todos os professores
@@ -133,19 +133,25 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
 
     public void mutar(int taxaPadrao) {
         Random rand = new Random();
-        float valor1 = (float) (1.0/(nivelAptidao));
-        float novo = ((valor1)*1000) * taxaPadrao;
-        int taxa = (int)novo;
+        float valor1 = (float) (1.0 / (nivelAptidao));
+        float novo = ((valor1) * 1600);
+//        System.out.println(" nivelAptidao " + nivelAptidao);
+//        System.out.println(" novo " + novo);
+        int taxa = (int) novo;
 //        taxa = taxa * taxa;
+//        System.out.println("taxa que chegou= " + taxaPadrao);
+//        System.out.println("taxa = " + taxa);
         for (int j = 0; j < taxa; j++) {
             int i = rand.nextInt(this.cursos.size());
             this.cursos.get(i).mutar();
+//            System.out.println("chegou");
         }
         gerarNivelAptidao();
+//        System.out.println("vai sair");
     }
 
     public void imprimir() {
-        System.out.println("\n\n" + getNome() + " APTIDAO-" + this.nivelAptidao+ " Pai:"+ pai);
+        System.out.println("\n\n" + getNome() + " APTIDAO-" + this.nivelAptidao + " Pai:" + pai);
         for (Curso curso : cursos) {
             curso.imprimir();
         }

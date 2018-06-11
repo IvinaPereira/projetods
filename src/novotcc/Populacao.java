@@ -90,10 +90,11 @@ public class Populacao {
     }
 
     public void mutar() throws CloneNotSupportedException {
+        int i = 0;
         for (Anticorpo horario : horarios) {
             if (!horario.isPai()) {
                 horario.mutar(taxa);
-
+                i++;
             }
         }
     }

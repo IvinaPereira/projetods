@@ -41,7 +41,7 @@ public class NovoTCC {
         ArrayList<Integer> anticorposBons = new ArrayList<>();
         ArrayList<Anticorpo> melhores = new ArrayList<>();
 
-        Banco banco = new Banco(5);
+        Banco banco = new Banco(4);
         Populacao pop = new Populacao(banco);
         int cont = 0;
         int g = 1;
@@ -50,29 +50,22 @@ public class NovoTCC {
         melhores.add(pop.getMelhor());
         anticorposBons.add(melhor);
         do {
-//            pop.imprimirSimples();
             media.add(pop.getMedia());
             pop.todosIguais();
             pop.atribuirPais();
             pop.gerarCopias();
-                pop.mutar();
-//            System.out.println("imprimindo depois das copias");
-//            pop.imprimirSimples();
-            if (cont % 1000 == 0 && g >= 0) {
+            pop.mutar();
+//            if (cont % 1000 == 0 && g >= 0) {
 //                pop.aumentaTaxaMutacao();
-                g--;
-            }
+//                g--;
+//            }
             if (cont % 50 == 0) {
-                System.out.println(azul + "Iteração " + cont);
+                System.out.println("\n"+azul + "Iteração " + cont);
+                pop.aumentaTaxaMutacao();
                 pop.getMelhor().imprimir();
-//                pop.mutarComPrint();
-
+                pop.getMelhor().imprimirHorariosProfessores();
             } 
-//            System.out.println("imprimindo depois da mutacao");
-//            pop.imprimirSimples();
             pop.retiraRuins();
-//            System.out.println("sem ruins");
-//            pop.imprimirSimples();
             cont++;
             melhor = pop.getMelhor().getNivelAptidao();
             melhores.add(pop.getMelhor());
@@ -84,7 +77,7 @@ public class NovoTCC {
 
 //        } while (cont < 1000 );
 //        } while (cont < 50000 && melhor < 800);
-        } while (melhor < 800);
+        } while (melhor < 1200);
 
         System.out.println("\n\n");
         System.out.println(ciano + "Medias das iteracoes");
@@ -95,13 +88,10 @@ public class NovoTCC {
         System.out.println("\n");
         System.out.println("Melhores individuos");
         for (int i = 0; i < melhores.size(); i++) {
-            if (i % 40 == 0) {
-                System.out.println("");
-            }
-            System.out.print(melhores.get(i).getNivelAptidao() + " - ");
+            System.out.println(melhores.get(i).getNivelAptidao());
         }
 
-        System.out.println("Melhores individuos");
+        System.out.println("anticorpos bons individuos");
         for (int i = 0; i < anticorposBons.size(); i++) {
             System.out.println(anticorposBons.get(i));
         }
