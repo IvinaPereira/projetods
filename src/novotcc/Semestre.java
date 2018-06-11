@@ -20,8 +20,13 @@ public class Semestre implements Cloneable {
     private int qtdAulas;
     private String nome;
 
-    private int pesoFuncao1 = 8;
-    private int pesoFuncao2 = 3;
+    private int pesoFuncao1 = 15;
+    private int pesoFuncao2AB = 3;
+    private int pesoFuncao2Disc = 6;
+    private int pesoFuncao2Vaga = 6;
+
+    private int diaBloqueado;
+    private boolean bloquear;
 
     public Semestre() {
         adicionarDiscVagas();
@@ -30,6 +35,15 @@ public class Semestre implements Cloneable {
     public Semestre(String nome, int aulas) {
         this.nome = nome;
         this.qtdAulas = aulas;
+        this.bloquear = false;
+        adicionarDiscVagas();
+    }
+
+    public Semestre(String nome, int aulas, boolean bloqueado, int dia) {
+        this.nome = nome;
+        this.qtdAulas = aulas;
+        this.bloquear = bloqueado;
+        this.diaBloqueado = dia;
         adicionarDiscVagas();
     }
 
@@ -39,6 +53,14 @@ public class Semestre implements Cloneable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getDiaBloqueado() {
+        return diaBloqueado;
+    }
+
+    public void setDiaBloqueado(int dia) {
+        this.diaBloqueado = dia;
     }
 
     public ArrayList<Disciplina> getDisciplinas() {
@@ -60,11 +82,18 @@ public class Semestre implements Cloneable {
     public void setQtdAulas(int qtdAulas) {
         this.qtdAulas = qtdAulas;
     }
-    
+
+    public boolean isBloquear() {
+        return bloquear;
+    }
+
+    public void setBloquear(boolean b) {
+        this.bloquear = b;
+    }
+
 //    public void setNivelAptidao(int nivelAptidao) {
 //        this.nivelAptidao = nivelAptidao;
 //    }
-
     public void gerarNivelAptidao() {
         int nivel = 0;
         nivel += funcao1();
@@ -78,7 +107,7 @@ public class Semestre implements Cloneable {
         for (int i = 0; i < 5; i++) {
             if (disciplinas.get(i).equals(disciplinas.get(i + 5))) {
                 disciplinas.get(i).setMesmoDia(true);
-                disciplinas.get(i+5).setMesmoDia(true);
+                disciplinas.get(i + 5).setMesmoDia(true);
                 nivel++;
             }
         }
@@ -86,22 +115,205 @@ public class Semestre implements Cloneable {
         return nivel;
     }
 
+//    public int funcao23() {
+//        int nivel = 0;
+//        if (this.qtdAulas >= 5) {
+//            //for apenas nas aulas do horário AB
+//            for (int i = 0; i < 5; i++) {
+////          se a disciplina for vaga
+//                if (disciplinas.get(i).isVaga()) {
+//                    disciplinas.get(i).setVagaAB(true);
+//                    nivel++;
+//                }
+//            }
+//        }
+//        nivel = nivel * pesoFuncao2AB;
+//        return nivel;
+//    }
     public int funcao2() {
         int nivel = 0;
-        if (this.qtdAulas >= 5) {
-            //for apenas nas aulas do horário AB
-            for (int i = 0; i < 5; i++) {
-//          se a disciplina for vaga
-                if (disciplinas.get(i).isVaga()) {
-                    disciplinas.get(i).setVagaAB(true);
-                    nivel++;
+        int nivel2 = 0;
+        int nivel3 = 0;
+        int diasDisponiveis = 5;
+
+        if (qtdAulas != 10) {
+
+            if (bloquear) {
+                diasDisponiveis = 4;
+            }
+
+            int permitidoVaga;
+            int permitidoDisc;
+            int vagaCompleta = 0;
+
+            if (diasDisponiveis >= qtdAulas) {
+                permitidoVaga = diasDisponiveis - qtdAulas;
+                permitidoDisc = 0;
+            } else {
+                permitidoDisc = qtdAulas - diasDisponiveis;
+                permitidoVaga = 0;
+            }
+
+            if (bloquear) {
+                for (int j = 0; j < 10; j++) {
+                    if (disciplinas.get(j).isVaga()) {
+                        if (j == diaBloqueado || j == diaBloqueado + 5) {
+                            vagaCompleta++;
+//                    if (vagaCompleta < 2) {
+//                        }
+
+                        } else {
+                            nivel2++;
+                            if (j < 5) {
+                                if (permitidoVaga == 0) {
+                                    disciplinas.get(j).setVagaAB(true);
+                                    nivel++;
+                                } else {
+                                    permitidoVaga--;
+                                }
+                            }
+                        }
+                    } else {
+                        if (j == diaBloqueado || j == diaBloqueado + 5) {
+                            nivel3++;
+                        } else {
+                            if (j >= 5) {
+                                if (permitidoDisc == 0) {
+                                    disciplinas.get(j).setDiscErrada(true);
+                                    nivel++;
+                                } else {
+                                    permitidoDisc--;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (vagaCompleta == 2) {
+                    nivel2 = 0;
+                }
+                nivel = nivel * pesoFuncao2Disc;
+            } else {
+                for (int j = 0; j < 10; j++) {
+                    if (disciplinas.get(j).isVaga()) {
+                        if (j < 5) {
+                            if (permitidoVaga == 0) {
+                                disciplinas.get(j).setVagaAB(true);
+                                nivel++;
+                            } else {
+                                permitidoVaga--;
+                            }
+                        }
+                    } else {
+                        if (j >= 5) {
+                            if (permitidoDisc == 0) {
+                                disciplinas.get(j).setDiscErrada(true);
+                                nivel++;
+                            } else {
+                                permitidoDisc--;
+                            }
+                        }
+                    }
                 }
             }
         }
-        nivel = nivel * pesoFuncao2;
-        return nivel;
+        nivel = nivel * pesoFuncao2AB;
+        nivel2 = nivel2 * pesoFuncao2Vaga;
+        nivel3 = nivel3 * pesoFuncao2Disc;
+        return nivel + nivel2 + nivel3;
+
     }
 
+    public int funcao25() {
+        int nivel = 0;
+        int nivel2 = 0;
+        int nivel3 = 0;
+        int nivel4 = 0;
+
+        int vagasNosBloqueados = 0;
+        //for apenas nas aulas do horário AB
+        if (bloquear) {
+            for (int i = 0; i < 10; i++) {
+                if (disciplinas.get(i).isVaga()) {
+
+                    if (i != diaBloqueado && i != diaBloqueado + 5) {
+//                        disciplinas.get(i).setVErrada(true);
+                        nivel2++;
+                        if (i < 5) {
+                            if (this.qtdAulas >= 5) {
+                                disciplinas.get(i).setVagaAB(true);
+                                nivel4++;
+                            } else {
+                                disciplinas.get(i).setVagaAB(true);
+                                nivel++;
+                            }
+                        }
+                    } else {
+                        vagasNosBloqueados++;
+                    }
+                } else {
+                    if (i == diaBloqueado || i == diaBloqueado + 5) {
+                        nivel3++;
+                    }
+                }
+            }
+        } else {
+            // se nao tiver no dia de bloqueio
+            for (int i = 0; i < 10; i++) {
+//          se a disciplina for vaga
+                if (disciplinas.get(i).isVaga()) {
+                    if (i < 5) {
+                        if (this.qtdAulas >= 5) {
+                            disciplinas.get(i).setVagaAB(true);
+                            nivel4++;
+                        } else {
+                            disciplinas.get(i).setVagaAB(true);
+                            nivel++;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        if (nivel > 0) {
+            int numPermitido = 5 - this.qtdAulas;
+            if (nivel > numPermitido) {
+                nivel = nivel * pesoFuncao2AB;
+            } else {
+                nivel = 0;
+            }
+        }
+        if (vagasNosBloqueados == 2) {
+            nivel2 = 0;
+        }
+
+        nivel2 = nivel2 * pesoFuncao2Vaga;
+        nivel3 = nivel3 * pesoFuncao2Disc;
+        nivel4 = nivel4 * pesoFuncao2AB;
+        return nivel + nivel2 + nivel3 + nivel4;
+    }
+
+//    public int funcao3() {
+//        int nivel = 0;
+//
+//        if (bloquear) {
+//            for (int i = 0; i < 10; i++) {
+//                if (disciplinas.get(i).isVaga()) {
+//                    if (i != diaBloqueado && i != (diaBloqueado + 5)) {
+//                        nivel++;
+//                    }
+//                } else {
+//                    if (i != diaBloqueado && i != (diaBloqueado + 5)) {
+//                        nivel++;
+//                    }
+//                }
+//
+//            }
+//
+//        }
+////        nivel = nivel * pesoFuncao3;
+//        return nivel;
+//    }
     public void gerar(Semestre banco, ArrayList<Professor> profs) throws CloneNotSupportedException {
         Random rand = new Random();
         ArrayList<Disciplina> disciBanco = banco.getDisciplinas();
@@ -124,7 +336,7 @@ public class Semestre implements Cloneable {
     }
 
     public void imprimir() {
-        System.out.println(this.nome + " Semestre -  APT-"+this.nivelAptidao);
+        System.out.println(this.nome + " Semestre -  APT-" + this.nivelAptidao);
         for (Disciplina disciplina : this.disciplinas) {
             disciplina.imprimir();
         }
@@ -132,7 +344,7 @@ public class Semestre implements Cloneable {
     }
 
     public void imprimirDisciplinas() {
-        System.out.println(""+this.nome + " Semestre - APT-"+this.nivelAptidao);
+        System.out.println("" + this.nome + " Semestre - APT-" + this.nivelAptidao);
         int i = 0;
         for (Disciplina disciplina : this.disciplinas) {
             disciplina.imprimirFormatado(i);
@@ -155,6 +367,11 @@ public class Semestre implements Cloneable {
         Semestre copia = new Semestre();
         copia.setNome(getNome());
         copia.setDisciplinas(clonarDisciplinas(profs));
+        copia.setQtdAulas(getQtdAulas());
+        copia.setBloquear(isBloquear());
+        if (copia.isBloquear()) {
+            copia.setDiaBloqueado(getDiaBloqueado());
+        }
         copia.setQtdAulas(getQtdAulas());
         copia.gerarNivelAptidao();
         return copia;
@@ -225,14 +442,14 @@ public class Semestre implements Cloneable {
             genee.get(aula2).getProfessor().setUmHorario(aula2);
             genee.get(aula2).getProfessor().retiraUmHorario(aula1);
         }
-        
-        
-        
+
         genee.get(aula1).setVagaAB(false);
+        genee.get(aula1).setDiscErrada(false);
         genee.get(aula1).setMesmoDia(false);
         genee.get(aula2).setVagaAB(false);
+        genee.get(aula2).setDiscErrada(false);
         genee.get(aula2).setMesmoDia(false);
-        
+
         gerarNivelAptidao();
     }
 }

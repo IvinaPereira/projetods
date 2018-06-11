@@ -15,12 +15,14 @@ import java.util.Collections;
 public class Populacao {
 
     private ArrayList<Anticorpo> horarios = new ArrayList<>();
-    private int tamanho = 100;
+    private int tamanho = 500;
     private int media;
     private Banco banco;
+    private int taxa;
 
     public Populacao(Banco banco) throws CloneNotSupportedException {
         this.banco = banco;
+        this.taxa = 1;
         gerar();
         gerarMedia();
     }
@@ -64,6 +66,13 @@ public class Populacao {
         return media;
     }
 
+    public void aumentaTaxaMutacao() {
+        if (taxa <= 10) {
+            taxa = taxa + 1;
+
+        }
+    }
+
     public Anticorpo getMelhor() {
         ordenar();
         return horarios.get(0);
@@ -81,13 +90,30 @@ public class Populacao {
     }
 
     public void mutar() throws CloneNotSupportedException {
-//        int taxa = 3;
         for (Anticorpo horario : horarios) {
             if (!horario.isPai()) {
-//                while (taxa > 0) {
-                    horario.mutar();
-//                    taxa--;
-//                }
+                horario.mutar(taxa);
+
+            }
+        }
+    }
+
+    public void mutarComPrint() throws CloneNotSupportedException {
+        int cont = 0;
+        System.out.print(NovoTCC.vermelho + "IMPRIMINDO O INDIVIDUO QUE VAI MUTAR");
+        for (Anticorpo horario : horarios) {
+            if (!horario.isPai()) {
+                if (cont == 0) {
+                    horario.imprimir();
+                    cont = 1;
+                    horario.mutar(taxa);
+                    System.out.print(NovoTCC.roxo + "IMPRIMINDO O INDIVIDUO MUTADO");
+                    horario.imprimir();
+                } else {
+                    horario.mutar(taxa);
+
+                }
+
             }
         }
     }
@@ -136,7 +162,7 @@ public class Populacao {
         ordenar();
         if (horarios.get(0).getNivelAptidao() == horarios.get(horarios.size() - 1).getNivelAptidao()) {
 //        imprimirSimples();
-            int porcentagem = 10;
+            int porcentagem = 50;
             int tamInicial = tamanho * porcentagem / 100;
             ArrayList<Anticorpo> novos = new ArrayList<>();
 //            System.out.println("\n\n\n\n\novos");

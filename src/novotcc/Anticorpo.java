@@ -24,6 +24,8 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
     private int pesoFuncao3 = 10;
     private int pesoFuncao4 = 6;
 
+    private int mutacaoAlta;
+
     private Banco banco;
     
     public Anticorpo(String nome, Banco banco) throws CloneNotSupportedException {
@@ -129,12 +131,12 @@ public class Anticorpo implements Cloneable, Comparable<Anticorpo> {
         }
     }
 
-    public void mutar() {
+    public void mutar(int taxaPadrao) {
         Random rand = new Random();
         float valor1 = (float) (1.0/(nivelAptidao));
-        float novo = (valor1)*1000;
+        float novo = ((valor1)*1000) * taxaPadrao;
         int taxa = (int)novo;
-        taxa = taxa * taxa;
+//        taxa = taxa * taxa;
         for (int j = 0; j < taxa; j++) {
             int i = rand.nextInt(this.cursos.size());
             this.cursos.get(i).mutar();

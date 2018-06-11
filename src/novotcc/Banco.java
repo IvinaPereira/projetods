@@ -24,22 +24,41 @@ public class Banco {
                 gerarCursos();
             }
             break;
-            case 1: {
+            case 1: {//8 semestres 8 profs
                 gerarProfsCaso1();
                 gerarCaso1();
             }
             break;
-            case 2: {
+            case 2: {//8 semestres 11 profs
                 gerarProfsCaso2();
                 gerarCaso2();
             }
             break;
-            case 3: {
+            case 3: {//disponibilidade dos 11 profs
                 gerarProfsCaso3();
                 gerarCaso2();
             }
             break;
-
+            case 4: {//com bloqueio de um dia da semana com 8
+                gerarProfsCaso2();
+                gerarCaso4();
+            }
+            break;
+            case 7: {//com bloqueio de um dia da semana com 11 profs
+                gerarProfsCaso2();
+                gerarCaso7();
+            }
+            break;
+            case 5: {//disciplinas vagas
+                gerarProfsCaso5();
+                gerarCaso5();
+            }
+            break;
+            case 6: {//disciplinas nulas com preferencia de prof
+                gerarProfsCaso5();
+                gerarCaso5();
+            }
+            break;
         }
 //        imprimirCursos();
 //        cursoSistemas.imprimirCurso();
@@ -638,7 +657,7 @@ public class Banco {
         semestre.setDisciplinas(disc);
         sems.add(semestre);
         curso.setSemestres(sems);
-        
+
         this.cursos.add(curso);
     }
 
@@ -687,7 +706,7 @@ public class Banco {
 
         this.professores = profs;
     }
-    
+
     private void gerarCaso2() {
         Curso curso = new Curso("Curso 1");
         ArrayList<Semestre> sems = new ArrayList<>();
@@ -834,7 +853,7 @@ public class Banco {
         semestre.setDisciplinas(disc);
         sems.add(semestre);
         curso.setSemestres(sems);
-        
+
         this.cursos.add(curso);
     }
 
@@ -893,10 +912,10 @@ public class Banco {
         prof = new Professor("Professor 10", disponibilidade, 10);
         profs.add(prof);
 
-        this.professores = profs;        
+        this.professores = profs;
     }
-    
-        private void gerarProfsCaso3() {
+
+    private void gerarProfsCaso3() {
         ArrayList<Professor> profs = new ArrayList<>();
         //disponibilidade dos professores, 1 - Sim // 0 - Não
         //6
@@ -947,10 +966,498 @@ public class Banco {
         prof = new Professor("Professor 9", disponibilidade, 9);
         profs.add(prof);
 
-        disponibilidade = new int[]{1, 0, 0, 0, 1, 0, 0, 1, 1, 1};
+        disponibilidade = new int[]{1, 0, 0, 0, 1, 0, 0, 0, 0, 1};
         prof = new Professor("Professor 10", disponibilidade, 10);
         profs.add(prof);
 
         this.professores = profs;
+    }
+
+    private void gerarCaso4() {
+        Curso curso = new Curso("Curso 1");
+        ArrayList<Semestre> sems = new ArrayList<>();
+        //criando o primeiro semestre de sistemas
+        ArrayList<Disciplina> disc = new ArrayList<>();
+        Semestre semestre = new Semestre("Primeiro", 8, true, 4);
+        Disciplina d = new Disciplina("D01", 1, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D02", 1, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D03", 1, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D04", 2, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("D05", 2, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("D06", 1, professores.get(3));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+//        criando segundo semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Segundo", 8, true, 4);
+        d = new Disciplina("D07", 1, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D08", 1, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("D09", 1, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D10", 1, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("D11", 1, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("D12", 1, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D13", 1, professores.get(6));
+        disc.add(d);
+        d = new Disciplina("D14", 1, professores.get(3));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+        //criando terceiro semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Terceiro", 8, true, 4);
+        d = new Disciplina("D15", 1, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D16", 2, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D17", 2, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("D18", 2, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("D19", 1, professores.get(3));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+//        //criando quarto semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Quarto", 8, true, 4);
+        d = new Disciplina("D20", 2, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D21", 2, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D22", 2, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D23", 2, professores.get(5));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando quinto semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Quinto", 8, true, 4);
+        d = new Disciplina("D24", 2, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D25", 1, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D26", 1, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D27", 2, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D28", 2, professores.get(6));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando sexto semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Sexto", 8, true, 4);
+        d = new Disciplina("D29", 2, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D30", 2, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D31", 2, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("D32", 2, professores.get(2));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando sétimo semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Sétimo", 8, true, 4);
+        d = new Disciplina("D33", 2, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("D34", 1, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D35", 1, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("D36", 2, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D37", 1, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D38", 1, professores.get(2));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando oitavo semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Oitavo", 8, true, 4);
+        d = new Disciplina("D39", 2, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D40", 1, professores.get(6));
+        disc.add(d);
+        d = new Disciplina("D41", 2, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("D42", 1, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D43", 1, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D44", 1, professores.get(3));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+        curso.setSemestres(sems);
+
+        this.cursos.add(curso);
+    }
+
+    private void gerarCaso5() {
+        Curso curso = new Curso("Curso 1");
+        ArrayList<Semestre> sems = new ArrayList<>();
+        //criando o primeiro semestre de sistemas
+        ArrayList<Disciplina> disc = new ArrayList<>();
+        Semestre semestre = new Semestre("Primeiro", 8);
+        Disciplina d = new Disciplina("D01", 1, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D02", 1, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D03", 2, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D04", 2, professores.get(6));
+        disc.add(d);
+        d = new Disciplina("D05", 2, professores.get(7));
+        disc.add(d);
+//        d = new Disciplina("D06", 2, professores.get(4));
+//        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+//        criando segundo semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Segundo", 9);
+        d = new Disciplina("D07", 1, professores.get(4));
+        disc.add(d);
+//        d = new Disciplina("D08", 1, professores.get(1));
+//        disc.add(d);
+        d = new Disciplina("D09", 2, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D10", 2, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D11", 2, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("D12", 2, professores.get(6));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+        //criando terceiro semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Terceiro", 5);
+//        d = new Disciplina("D13", 1, professores.get(6));
+//        disc.add(d);
+        d = new Disciplina("D14", 1, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D15", 2, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D16", 2, professores.get(1));
+        disc.add(d);
+//        d = new Disciplina("D17", 2, professores.get(7));
+//        disc.add(d);
+//        d = new Disciplina("D18", 2, professores.get(4));
+//        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+//        //criando quarto semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Quarto", 8);
+        d = new Disciplina("D19", 1, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D20", 1, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D21", 2, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D22", 2, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D23", 2, professores.get(5));
+        disc.add(d);
+//        d = new Disciplina("D24", 2, professores.get(6));
+//        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando quinto semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Quinto", 4);
+//        d = new Disciplina("D25", 1, professores.get(4));
+//        disc.add(d);
+//        d = new Disciplina("D26", 1, professores.get(5));
+//        disc.add(d);
+//        d = new Disciplina("D27", 2, professores.get(0));
+//        disc.add(d);
+//        d = new Disciplina("D28", 2, professores.get(7));
+//        disc.add(d);
+        d = new Disciplina("D29", 2, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D30", 2, professores.get(3));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando sexto semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Sexto", 9);
+        d = new Disciplina("D31", 1, professores.get(0));
+        disc.add(d);
+//        d = new Disciplina("D32", 1, professores.get(7));
+//        disc.add(d);
+        d = new Disciplina("D33", 2, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D34", 2, professores.get(6));
+        disc.add(d);
+        d = new Disciplina("D35", 2, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D36", 2, professores.get(5));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando sétimo semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Sétimo", 10);
+        d = new Disciplina("D37", 1, professores.get(6));
+        disc.add(d);
+        d = new Disciplina("D38", 1, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("D39", 2, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D40", 2, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D41", 2, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("D42", 2, professores.get(7));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando oitavo semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Oitavo", 8);
+        d = new Disciplina("D43", 1, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D44", 1, professores.get(7));
+        disc.add(d);
+        d = new Disciplina("D45", 2, professores.get(0));
+        disc.add(d);
+//        d = new Disciplina("D46", 2, professores.get(3));
+//        disc.add(d);
+        d = new Disciplina("D47", 2, professores.get(4));
+        disc.add(d);
+        d = new Disciplina("D48", 2, professores.get(5));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+        curso.setSemestres(sems);
+
+        this.cursos.add(curso);
+    }
+
+    private void gerarProfsCaso5() {
+        ArrayList<Professor> profs = new ArrayList<>();
+        //disponibilidade dos professores, 1 - Sim // 0 - Não
+        //6
+        int[] disponibilidade = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        Professor prof = new Professor("Professor 0", disponibilidade, 0);
+        profs.add(prof);
+
+        //4
+        disponibilidade = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 1", disponibilidade, 1);
+        profs.add(prof);
+
+        //10
+        disponibilidade = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 2", disponibilidade, 2);
+        profs.add(prof);
+
+        //6
+        disponibilidade = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 3", disponibilidade, 3);
+        profs.add(prof);
+
+        //5
+        disponibilidade = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 4", disponibilidade, 4);
+        profs.add(prof);
+
+        //9
+        disponibilidade = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 5", disponibilidade, 5);
+        profs.add(prof);
+
+        //6
+        disponibilidade = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 6", disponibilidade, 6);
+        profs.add(prof);
+
+        //5
+        disponibilidade = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        prof = new Professor("Professor 7", disponibilidade, 7);
+        profs.add(prof);
+
+        this.professores = profs;
+    }
+
+    private void gerarCaso7() {
+        Curso curso = new Curso("Curso 1");
+        ArrayList<Semestre> sems = new ArrayList<>();
+        //criando o primeiro semestre de sistemas
+        ArrayList<Disciplina> disc = new ArrayList<>();
+        Semestre semestre = new Semestre("Primeiro", 8, true, 4);
+        Disciplina d = new Disciplina("D01", 1, professores.get(10));
+        disc.add(d);
+        d = new Disciplina("D02", 1, professores.get(8));
+        disc.add(d);
+//        d = new Disciplina("D03", 2, professores.get(9));
+//        disc.add(d);
+        d = new Disciplina("D04", 2, professores.get(6));
+        disc.add(d);
+        d = new Disciplina("D05", 2, professores.get(7));
+        disc.add(d);
+        d = new Disciplina("D06", 2, professores.get(4));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+//        criando segundo semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Segundo", 8, true, 4);
+//        d = new Disciplina("D07", 1, professores.get(4));
+//        disc.add(d);
+//        d = new Disciplina("D08", 1, professores.get(1));
+//        disc.add(d);
+        d = new Disciplina("D09", 2, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D10", 2, professores.get(9));
+        disc.add(d);
+        d = new Disciplina("D11", 2, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("D12", 2, professores.get(10));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+        //criando terceiro semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Terceiro", 8, true, 4);
+//        d = new Disciplina("D13", 1, professores.get(6));
+//        disc.add(d);
+//        d = new Disciplina("D14", 1, professores.get(9));
+//        disc.add(d);
+        d = new Disciplina("D15", 2, professores.get(8));
+        disc.add(d);
+        d = new Disciplina("D16", 2, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D17", 2, professores.get(7));
+        disc.add(d);
+        d = new Disciplina("D18", 2, professores.get(4));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+//        //criando quarto semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Quarto", 8, true, 4);
+        d = new Disciplina("D19", 1, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D20", 1, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D21", 2, professores.get(0));
+        disc.add(d);
+        d = new Disciplina("D22", 2, professores.get(1));
+        disc.add(d);
+        d = new Disciplina("D23", 2, professores.get(9));
+        disc.add(d);
+//        d = new Disciplina("D24", 2, professores.get(6));
+//        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando quinto semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Quinto", 8, true, 4);
+        d = new Disciplina("D25", 1, professores.get(8));
+        disc.add(d);
+        d = new Disciplina("D26", 1, professores.get(5));
+        disc.add(d);
+        d = new Disciplina("D27", 2, professores.get(0));
+        disc.add(d);
+//        d = new Disciplina("D28", 2, professores.get(7));
+//        disc.add(d);
+        d = new Disciplina("D29", 2, professores.get(2));
+        disc.add(d);
+        d = new Disciplina("D30", 2, professores.get(3));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando sexto semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Sexto", 5, true, 4);
+        d = new Disciplina("D31", 1, professores.get(0));
+        disc.add(d);
+//        d = new Disciplina("D32", 1, professores.get(8));
+//        disc.add(d);
+        d = new Disciplina("D33", 2, professores.get(1));
+        disc.add(d);
+//        d = new Disciplina("D34", 2, professores.get(6));
+//        disc.add(d);
+//        d = new Disciplina("D35", 2, professores.get(2));
+//        disc.add(d);
+        d = new Disciplina("D36", 2, professores.get(5));
+        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando sétimo semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Sétimo", 4, true, 4);
+//        d = new Disciplina("D37", 1, professores.get(6));
+//        disc.add(d);
+//        d = new Disciplina("D38", 1, professores.get(5));
+//        disc.add(d);
+        d = new Disciplina("D39", 2, professores.get(3));
+        disc.add(d);
+        d = new Disciplina("D40", 2, professores.get(1));
+        disc.add(d);
+//        d = new Disciplina("D41", 2, professores.get(4));
+//        disc.add(d);
+//        d = new Disciplina("D42", 2, professores.get(7));
+//        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+
+        //criando oitavo semestre de sistemas
+        disc = new ArrayList<>();
+        semestre = new Semestre("Oitavo", 3, true, 4);
+//        d = new Disciplina("D43", 1, professores.get(2));
+//        disc.add(d);
+        d = new Disciplina("D44", 1, professores.get(7));
+        disc.add(d);
+        d = new Disciplina("D45", 2, professores.get(0));
+        disc.add(d);
+//        d = new Disciplina("D46", 2, professores.get(3));
+//        disc.add(d);
+//        d = new Disciplina("D47", 2, professores.get(4));
+//        disc.add(d);
+//        d = new Disciplina("D48", 2, professores.get(5));
+//        disc.add(d);
+        semestre.setDisciplinas(disc);
+        sems.add(semestre);
+        curso.setSemestres(sems);
+
+        this.cursos.add(curso);
     }
 }

@@ -17,6 +17,7 @@ public class Curso implements Cloneable {
     private ArrayList<Semestre> semestres = new ArrayList<>();
     private String nome;
     private int nivelAptidao;
+    private int diaBloqueado;
 
     public Curso() {
 
@@ -32,6 +33,10 @@ public class Curso implements Cloneable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setDiaBloqueado(int dia) {
+        this.diaBloqueado = dia;
     }
 
     public ArrayList<Semestre> getSemestres() {
@@ -60,7 +65,7 @@ public class Curso implements Cloneable {
     public void gerar(Curso banco, ArrayList<Professor> profs) throws CloneNotSupportedException {
         ArrayList<Semestre> semes = banco.getSemestres();
         for (Semestre semestre : semes) {
-            Semestre sem = new Semestre(semestre.getNome(), semestre.getQtdAulas());
+            Semestre sem = new Semestre(semestre.getNome(), semestre.getQtdAulas(), semestre.isBloquear(),semestre.getDiaBloqueado());
             sem.gerar(semestre, profs);
             this.semestres.add(sem);
         }

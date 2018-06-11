@@ -41,9 +41,10 @@ public class NovoTCC {
         ArrayList<Integer> anticorposBons = new ArrayList<>();
         ArrayList<Anticorpo> melhores = new ArrayList<>();
 
-        Banco banco = new Banco(3);
+        Banco banco = new Banco(5);
         Populacao pop = new Populacao(banco);
         int cont = 0;
+        int g = 1;
         int ultimaGeracao = 0;
         int melhor = pop.getMelhor().getNivelAptidao();
         melhores.add(pop.getMelhor());
@@ -54,9 +55,19 @@ public class NovoTCC {
             pop.todosIguais();
             pop.atribuirPais();
             pop.gerarCopias();
+                pop.mutar();
 //            System.out.println("imprimindo depois das copias");
 //            pop.imprimirSimples();
-            pop.mutar();
+            if (cont % 1000 == 0 && g >= 0) {
+//                pop.aumentaTaxaMutacao();
+                g--;
+            }
+            if (cont % 50 == 0) {
+                System.out.println(azul + "Iteração " + cont);
+                pop.getMelhor().imprimir();
+//                pop.mutarComPrint();
+
+            } 
 //            System.out.println("imprimindo depois da mutacao");
 //            pop.imprimirSimples();
             pop.retiraRuins();
@@ -66,17 +77,14 @@ public class NovoTCC {
             melhor = pop.getMelhor().getNivelAptidao();
             melhores.add(pop.getMelhor());
 
-            if (cont % 500 == 0) {
-                System.out.println(azul + "Iteração " + cont);
-//                pop.getMelhor().imprimir();
-            }
             if (melhor > anticorposBons.get(anticorposBons.size() - 1)) {
                 anticorposBons.add(melhor);
                 ultimaGeracao = cont;
             }
 
 //        } while (cont < 1000 );
-        } while (cont < 1000 && melhor < 800);
+//        } while (cont < 50000 && melhor < 800);
+        } while (melhor < 800);
 
         System.out.println("\n\n");
         System.out.println(ciano + "Medias das iteracoes");

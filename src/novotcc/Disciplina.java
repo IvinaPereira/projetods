@@ -19,6 +19,7 @@ public class Disciplina implements Cloneable {
 
     private boolean mesmoDia;
     private boolean vagaAB;
+    private boolean vagaErrada;
     private boolean profChoque;
     private boolean profPrefer;
 
@@ -87,6 +88,7 @@ public class Disciplina implements Cloneable {
             copia.setIsVaga(false);
         } else {
             copia.setIsVaga(true);
+            copia.setNome("Vaga");
         }
 
         return copia;
@@ -105,6 +107,11 @@ public class Disciplina implements Cloneable {
         this.vagaAB = vaga;
     }
 
+  
+    public void setDiscErrada(boolean vaga) {
+        this.vagaErrada = vaga;
+    }
+
     public void setMesmoDia(boolean vaga) {
         this.mesmoDia = vaga;
     }
@@ -116,8 +123,10 @@ public class Disciplina implements Cloneable {
             System.out.print(NovoTCC.GREEN + NovoTCC.branco + " CD " + NovoTCC.RESET);
         }
         if (isVaga) {
-            if (vagaAB) {
-                System.out.print(NovoTCC.roxo + "" + getNome() + " -- ");
+            if (vagaAB || vagaErrada) {
+                System.out.print(NovoTCC.roxo + "" + getNome() + " - ");
+            }else{
+                System.out.print(NovoTCC.branco + "" + getNome() + " - ");
             }
         } else if (mesmoDia) {
             System.out.print(NovoTCC.amarelo + "" + getNome() + " -- ");
